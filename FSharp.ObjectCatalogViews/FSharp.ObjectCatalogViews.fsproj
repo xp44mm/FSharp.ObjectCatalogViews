@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Description>将SQL数据库打印成F#记录类型</Description>
+    <Authors>xp44m</Authors>
+    <Company>34696643@qq.com</Company>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/xp44mm/FSharp.ObjectCatalogViews</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="DataTypes.fs" />
+    <Compile Include="ObjectCatalogViews.fs" />
+    <Compile Include="Database.fs" />
+    <Compile Include="TableMeta.fs" />
+    <Compile Include="ReadOnlyRecord.fs" />
+    <Compile Include="SchemaValid.fs" />
+    <Compile Include="DataValid.fs" />
+    <Compile Include="OcvGenerator.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.Literals" Version="2.0.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>
