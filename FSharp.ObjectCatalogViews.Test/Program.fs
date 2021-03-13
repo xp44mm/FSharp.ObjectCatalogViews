@@ -7,7 +7,7 @@ let ocv () =
     let db_name = "Cuisl"
     let code = OcvGenerator.ocvDefinition ConnectionString.connstr db_name
 
-    let path = Path.Combine(ConnectionString.outputPath, "ObjectCatalogViews.fs")
+    let path = Path.Combine(ConnectionString.LakeOutputPath, "ObjectCatalogViews.fs")
     File.WriteAllText(path, code)
     Console.WriteLine("ocv done!")
 
@@ -15,7 +15,7 @@ let lake () =
     let db_name = "Lake"
     let code = ReadOnlyRecord.databaseDefinition ConnectionString.connstr db_name
 
-    let path = Path.Combine(ConnectionString.outputPath, sprintf @"%s.fs" db_name)
+    let path = Path.Combine(ConnectionString.LakeOutputPath, sprintf @"%s.fs" db_name)
     File.WriteAllText(path, code)
     Console.WriteLine("lake done!")
 

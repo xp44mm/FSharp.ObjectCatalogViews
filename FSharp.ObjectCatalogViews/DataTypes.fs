@@ -1,6 +1,8 @@
 ﻿module FSharp.ObjectCatalogViews.DataTypes
 
 open System
+open System.Collections.Generic
+open FSharp.Idioms.StringOps
 
 type private DataTypeEntry = { 
     Sql:string; // ocv 里面的 type_name
@@ -10,7 +12,6 @@ type private DataTypeEntry = {
     Fsharp:string
     }
 
-let private (==) (a:string) b = a.Equals(b,StringComparison.OrdinalIgnoreCase) 
 
 let private newRec(s,c,e,r,f) ={Sql=s;Clr=c;Enumeration=e;Reader=r;Fsharp=f}
 
@@ -85,16 +86,12 @@ let fsharpType nullable sqlType =
         sprintf "Nullable<%s>" fs
     else
         fs
-
 ///ado.net reader方法的读取方法名称
 let readerMethodName sqlType = ls |> List.find(fun rcd -> rcd.Sql == sqlType) |> fun rcd -> rcd.Reader
-
 let enum sqlType = ls |> List.find(fun rcd -> rcd.Sql == sqlType) |> fun rcd -> rcd.Enumeration
-
 //变长类型
 let private sizableTypes = set [
     "binary"; "char"; "datetime2"; "datetimeoffset"; "nchar"; "nvarchar"; "time"; "varbinary"; "varchar"]
-
 ///当使用unicode存储时，每个字符占两个byte
 let sqlDataType typeName maxLength =
     if sizableTypes.Contains typeName then

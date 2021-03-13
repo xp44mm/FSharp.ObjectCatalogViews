@@ -1,4 +1,5 @@
-namespace FSharp.ObjectCatalogViews
+namespace FSharp.ObjectCatalogViews //数据结构更接近数据库的形状。将数据库元素据表一对一映射到类型中。
+
 open System
 open System.Data.SqlClient
 
@@ -7,7 +8,7 @@ type databases =
         database_id: int;
         name: string;
     }
-    static member GetArray (connstr) =
+    static member GetArray(connstr) =
         let sql = "SELECT [database_id], [name] FROM master.sys.databases"
         [|
             use conn = new SqlConnection(connstr)

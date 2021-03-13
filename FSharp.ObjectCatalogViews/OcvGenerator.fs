@@ -2,8 +2,8 @@
 
 open TableMeta
 open FSharp.Literals
+open FSharp.Idioms.StringOps
 
-let ( ** ) str i = String.replicate i str
 let space4 = " " ** 4
 
 let readFieldValue (col:Column) =

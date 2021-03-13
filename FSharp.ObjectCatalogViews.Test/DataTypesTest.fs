@@ -1,10 +1,9 @@
-﻿namespace FSharp.ObjectCatalogViews.Test
+﻿namespace FSharp.ObjectCatalogViews
 
 open Xunit
 open Xunit.Abstractions
 
 open FSharp.xUnit
-open FSharp.ObjectCatalogViews
 
 type DataTypesTest(output: ITestOutputHelper) =
     [<Fact>]

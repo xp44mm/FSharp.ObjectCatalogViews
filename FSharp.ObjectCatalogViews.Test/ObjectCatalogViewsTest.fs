@@ -1,8 +1,7 @@
-﻿namespace FSharp.ObjectCatalogViews.Test
+﻿namespace FSharp.ObjectCatalogViews
 
 open Xunit
 open Xunit.Abstractions
-open FSharp.ObjectCatalogViews
 
 type ObjectCatalogViewsTest(output: ITestOutputHelper) =
 
