@@ -12,8 +12,8 @@ type TableMetaTest(output: ITestOutputHelper) =
     [<Fact>]
     member this.``get Structural Schemas``() =
         let db_name = "Lake"
-        let data = TableMeta.getStructuralSchemas ConnectionString.connstr db_name
-        output.WriteLine(FSharp.Literals.Render.stringify data)
+        let schemas = TableMeta.getStructuralSchemas ConnectionString.connstr db_name
+        output.WriteLine(FSharp.Literals.Render.stringify schemas)
 
     [<Fact>]
     member this.``read table``() =

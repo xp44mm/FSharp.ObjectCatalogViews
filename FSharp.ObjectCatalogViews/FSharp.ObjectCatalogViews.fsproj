@@ -8,10 +8,10 @@
     <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/xp44mm/FSharp.ObjectCatalogViews</RepositoryUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Copyright>xp44mm</Copyright>
     <PackageProjectUrl>https://github.com/xp44mm/FSharp.ObjectCatalogViews</PackageProjectUrl>
-    <PackageReleaseNotes>decouple get-data from print-data</PackageReleaseNotes>
+    <PackageReleaseNotes>update Dependencies</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
