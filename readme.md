@@ -1,6 +1,6 @@
 # FSharp.ObjectCatalogViews
 
-��SQL���ݿ��ӡ��F#��¼���͡�֧��SqlServer���ݿ⡣
+将SQL数据库打印成F#记录类型。支持SqlServer数据库。
 
 ## Getting FSharp.Literals over NuGet
 
@@ -14,9 +14,20 @@ You can also use the graphical library package manager ("Manage NuGet Packages f
 
 ## Get Started
 
-### ��ȡ���ݿ�ģʽ
+### 获取F#类型信息
 
-��ȡ���ݿ������б�����ͼ��Ԫ���ݡ�
+根据数据库的类型，获取`Type`对象实例：
+
+```F#
+let is_nullable = true
+let type_name = "float"
+let ty = SqlTypeUtils.getType is_nullable type_name
+Should.equal ty typeof<Nullable<float>>
+```
+
+### 获取数据库模式
+
+获取数据库中所有表和视图的元数据。
 
 ```F#
 let connstr = "Data Source=.;Integrated Security=True"
@@ -24,7 +35,7 @@ let db_name = "cook"
 let schemas = TableMeta.getStructuralSchemas connstr db_name
 ```
 
-sqlserver���ݿ�������ɸ�ģʽ��ÿ��ģʽ�������ɸ�������ͼ�����ǿ��Դ�preceding code��������ĳ������Ԫ���ݡ�
+sqlserver数据库包含若干个模式，每个模式包含若干个表或视图。我们可以从preceding code索引具体某个表的元数据。
 
 ```F#
 let schema_name = "dbo"
@@ -32,29 +43,29 @@ let table_name = "book"
 let table = schemas.[schema_name].[table_name]
 ```
 
-### ��ȡ���ݿ��е�ֵ
+### 获取数据库中的值
 
-���˱���Ԫ���ݣ����ǿ��Զ�ȡ����
+有了表的元数据，我们可以读取表：
 
 ```F#
 let data:(string*Type*obj)[][] = TableMeta.readTable connstr db_name schema_name table
 ```
 
-��ȡ����������һ���������飬��һ���ʾ�����������У��ڶ����ʾÿ���������ֶΣ�Ԫ��ķ������α�ʾ�ֶε����ƣ��ֶε����ͣ����ֶε�ֵ��������Щ�������ǾͿ������÷��佫����ӳ�䵽��ר�õ������С�
+读取到的数据是一个交错数组，第一层表示数据有许多行，第二层表示每行有许多字段，元组的分量依次表示字段的名称，字段的类型，和字段的值。有了这些数据我们就可以利用反射将数据映射到更专用的类型中。
 
-�ֶ����͵�ӳ�����
+字段类型的映射规则：
 
-* ���ɿյ��У��򵥰���ӳ���ӳ�䡣
+* 不可空的列，简单按照映射表映射。
 
-* ��Ϊ�յ��У��������ͼ򵥰���ӳ���ӳ�䡣ֵ����ӳ��Ϊ��Ӧ��`Nullable<>`���͡��磺is null int ӳ��Ϊ`Nullable<int>`��
+* 可为空的列，引用类型简单按照映射表映射。值类型映射为对应的`Nullable<>`类型。如：is null int 映射为`Nullable<int>`。
 
-�ֶη���ֵӳ�����
+字段返回值映射规则：
 
-* `DBNull.Value`ӳ��Ϊ`null`��
+* `DBNull.Value`映射为`null`。
 
-* ��������ӳ���ӳ��ֵ��
+* 其他按照映射表映射值。
 
-### Ӧ���ڴ����Զ�����
+### 应用于代码自动生成
 
 The basic usage:
 
@@ -62,10 +73,10 @@ The basic usage:
 let code = ReadOnlyRecord.databaseDefinition connstr db_name
 ```
 
-���ϴ��뽫�����ɱ��ֶ���ɵļ�¼��������һ����̬���飬װ�����ݿ���ڵ��������ݡ�
+以上代码将会生成表字段组成的记录，并且有一个静态数组，装有数据库表内的所有数据。
 
-����������������֤���ݿ��ļ��Ƿ���ڣ�
+有两个方法用于验证数据库文件是否过期：
 
-`SchemaValidTest`������֤��¼���Ͷ����Ƿ������ݿ�һ�¡�
+`SchemaValidTest`用于验证记录类型定义是否与数据库一致。
 
-`DataValidTest`������֤��̬�����Ƿ������ݿ��е�����һ�¡�
+`DataValidTest`用于验证静态数组是否与数据库中的数组一致。
