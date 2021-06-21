@@ -1,18 +1,6 @@
 # FSharp.ObjectCatalogViews
 
-将SQL数据库打印成F#记录类型。支持SqlServer数据库。
-
-## Getting FSharp.Literals over NuGet
-
-The simplest way of integrating FSharp.ObjectCatalogViews to your project is by using NuGet. You can install it by opening the package manager console (PM) and typing in the following statement:
-
-```
-Install-Package FSharp.ObjectCatalogViews
-```
-
-You can also use the graphical library package manager ("Manage NuGet Packages for Solution"). Searching for package's name in the official NuGet online feed will find this library.
-
-## Get Started
+将SQL数据库打印成F#记录类型。支持SqlServer数据库。可以从NuGet安装此包。
 
 ### 获取F#类型信息
 

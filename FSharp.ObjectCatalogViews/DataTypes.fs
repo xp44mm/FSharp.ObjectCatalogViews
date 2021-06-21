@@ -1,7 +1,6 @@
 ﻿module FSharp.ObjectCatalogViews.DataTypes
 
 open System
-open System.Collections.Generic
 open FSharp.Idioms.StringOps
 
 type private DataTypeEntry = { 
