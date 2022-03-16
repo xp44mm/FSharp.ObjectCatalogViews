@@ -9,7 +9,7 @@ let space4 = " " ** 4
 
 let fsDataTypeDefinition (col: TableMeta.Column) = 
     let ty = SqlTypeUtils.getType col.is_nullable col.type_name
-    Render.printTypeObj ty
+    Literal.stringifyTypeDynamic ty
 
 let fieldDefinition (col: TableMeta.Column) =     
     let datatype = fsDataTypeDefinition col
