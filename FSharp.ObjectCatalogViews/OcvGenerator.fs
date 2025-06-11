@@ -84,7 +84,7 @@ let ocvDefinition connstr db_name =
     [|
         yield "namespace ObjectCatalogViews"
         yield "open System"
-        yield "open System.Data.SqlClient"
+        yield "open Microsoft.Data.SqlClient"
 
         yield! databaseRecord databseTable
 

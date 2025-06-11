@@ -1,6 +1,6 @@
 ﻿module FSharp.ObjectCatalogViews.TableMeta
 
-open System.Data.SqlClient
+open Microsoft.Data.SqlClient
 open System
 
 type Column = 

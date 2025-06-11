@@ -1,7 +1,7 @@
 namespace FSharp.ObjectCatalogViews //数据结构更接近数据库的形状。将数据库元素据表一对一映射到类型中。
 
 open System
-open System.Data.SqlClient
+open Microsoft.Data.SqlClient
 
 type databases = 
     {
